@@ -310,7 +310,7 @@ Now, Firstly create a database for adding all the entries in a specific self cre
 
 **command**
 ```
-$ dsconf -D "cn=Directory Manager" ldap://localhost:3389 backend create --suffix "dc=keenable,dc=io" --be-name example
+$ dsconf -D "cn=Directory Manager" ldap://localhost:3389 backend create --suffix "dc=keenable,dc=io" -w redhat --be-name example
 ```
 
 **output**
@@ -348,7 +348,7 @@ Explanation of each option:
 
 **command**
 ```
-$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -f base.ldif
+$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -w redhat -f base.ldif
 ```
 
 **output**
@@ -381,7 +381,7 @@ userPassword: rishabh@123
 Now, add this user.ldif file to 389ds Database
 **command**
 ```
-$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -f user.ldif
+$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -w redhat -f user.ldif
 ```
 
 **output**
@@ -392,7 +392,7 @@ adding new entry "uid=rishabh,ou=users,dc=keenable,dc=io"
 Now, lets verify if the base and user are successfully added to 389ds 
 **command**
 ```
-$ ldapsearch -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -b "dc=keenable,dc=io"
+$ ldapsearch -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -w redhat -b "dc=keenable,dc=io"
 ```
 **output**
 ```
@@ -441,3 +441,44 @@ result: 0 Success
 ```
 
 This will show all the entries of 389ds.
+
+### Step 10: Creating Realm and adding UserFederation as 389ds in Keycloak
+After accessing the Admin Console of Keycloak
+
+- Click on create a new realm button shown below-:
+![image](https://github.com/user-attachments/assets/df5c5989-6c14-4a0e-9a3c-c467dbec66ac)
+
+- Now, Create a realm named prod-keenable
+![image](https://github.com/user-attachments/assets/9b7aee27-4689-4a5f-8476-80551b502486)
+
+Then click on create realm button shown in the above fig.
+
+For adding User Federation as 389ds in keyclaok follow below mentioned steps -:
+
+- Click on User Federation
+![image](https://github.com/user-attachments/assets/f017f62f-6f48-4df2-b29a-4b7ca17c87d7)
+
+- Click on Add LDAP provider
+![image](https://github.com/user-attachments/assets/7dc6b690-bbf1-4a25-a5b9-f57ae7aae5b1)
+
+- Add the mentioned details
+### **Connection Settings**
+| Option | Value |
+|--------|-------|
+|**UI display name**| `ldap` |
+| **Vendor** | `Red Hat Directory Server` |
+| **Connection URL** | `ldap://65.21.120.112:3389` |
+
+</details>
+
+---
+
+### **Authentication Settings**
+| Option | Value |
+|--------|-------|
+| **Users DN** | `ou=users,dc=example,dc=com` |
+| **Bind DN** | `cn=Directory Manager` |
+| **Bind Credential** | `redhat` |
+
+<details>
+<summary>🔍 Click to See Example</summary>
