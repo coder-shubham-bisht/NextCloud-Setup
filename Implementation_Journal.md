@@ -461,25 +461,28 @@ Then click on create realm button shown in the above fig.
 For adding User Federation as 389ds in keyclaok follow below mentioned steps -:
 
 - Click on User Federation
-![image](https://github.com/user-attachments/assets/f017f62f-6f48-4df2-b29a-4b7ca17c87d7)
+![image](https://github.com/user-attachments/assets/171fc466-6510-474e-b4dd-7b60d8f4c847)
 
 - Click on Add LDAP provider
-![image](https://github.com/user-attachments/assets/7dc6b690-bbf1-4a25-a5b9-f57ae7aae5b1)
+![image](https://github.com/user-attachments/assets/549dc6a9-4f8f-47d1-8d9c-0b8de6923e64)
+
 
 - Add the mentioned details as per the below provided image
-![image](https://github.com/user-attachments/assets/ec1a8b2b-e863-4384-bfdb-950ac3114735)
-![image](https://github.com/user-attachments/assets/26a3b80c-31cb-4024-a5c7-c3cab4b7b2c4)
+![image](https://github.com/user-attachments/assets/7eb4fe22-3fb8-41a5-9599-5300e44c40f1)
+![image](https://github.com/user-attachments/assets/3e78fa17-cc24-4df7-9f34-5222dcbd3350)
+
 
 - After adding this Click on test connection it should see Successfully connected to LDAP as per the fig below attached-:
-![image](https://github.com/user-attachments/assets/66374d24-3139-4b6f-a270-abe872ec4a5b)
+![image](https://github.com/user-attachments/assets/c34f257e-1a8e-4bb1-9ebd-db50c201b1b3)
+
 
 Now, Click on Action button and then click on **sync all users**
-![image](https://github.com/user-attachments/assets/0867940f-0b3f-4e0d-b859-b19c89a86210)
+![image](https://github.com/user-attachments/assets/a713a36a-8447-482f-8d12-26421c3d55ff)
 
 **Output**
-![image](https://github.com/user-attachments/assets/b8bf108e-2553-453d-b271-6e2897ca56d8)
+![image](https://github.com/user-attachments/assets/16c59570-2561-482e-82b9-3df88f3412f3)
 
 Now, We can see the output in the above image that 1 User which was added in 389ds is synced to Keycloak which we will verify by going to users on 389ds page , image is attached below 
-![image](https://github.com/user-attachments/assets/ed4b9884-8130-4bfb-b96e-efe373bf292b)
+![image](https://github.com/user-attachments/assets/0ae50a22-ab27-49fb-9dc9-65b57d30cb40)
 
 **By these steps we can add user federation to keycloak and sync all the user from 389ds**
