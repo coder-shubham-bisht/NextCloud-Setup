@@ -344,7 +344,7 @@ Explanation of each option:
 - -D "cn=Directory Manager": Logs in as the admin user (Directory Manager).
 - -W: Asks for the admin password.
 - -H ldap://localhost:3389: Connects to the LDAP server on your machine at port 3389.
-- -f /tmp/base.ldif: Uses the file /tmp/base.ldif to add data to the directory.
+- -f base.ldif: Uses the file base.ldif to add data to the directory.
 
 **command**
 ```
