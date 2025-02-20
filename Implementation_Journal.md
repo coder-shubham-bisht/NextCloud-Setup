@@ -383,18 +383,18 @@ mail: rishabh@gmail.com
 userPassword: rishabh@123
 ```
 
-Now, add this user.ldif file to 389ds Database
+Now, add this user.ldif file to 389ds Database  
 **command**
 ```
 $ ldapadd -x -D "cn=Directory Manager"  -H ldap://localhost:3389 -w redhat -f user.ldif
 ```
 
-**output**
+**output**  
 ```
 adding new entry "uid=rishabh,ou=users,dc=keenable,dc=io"
 ```
 
-Now, lets verify if the base and user are successfully added to 389ds 
+Now, lets verify if the base and user are successfully added to 389ds    
 **command**
 ```
 $ ldapsearch -x -D "cn=Directory Manager" -H ldap://localhost:3389 -w redhat -b "dc=keenable,dc=io"
