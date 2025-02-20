@@ -200,7 +200,7 @@ $ mkdir -p /home/prodamin/389ds-data
 
 **command**
 ```
-$ podman run -d --name 389ds_ldap --network nextcloud-network -e DS_DM_PASSWORD=nextcloud -v /home/prodadmin/389ds-data:/data  --security-opt label=disable  docker.io/389ds/dirsrv:latest
+$ podman run -d --name 389ds_ldap --network nextcloud-network -e DS_DM_PASSWORD=redhat -v /home/prodadmin/389ds-data:/data  --security-opt label=disable  docker.io/389ds/dirsrv:latest
 ```
 
 **output**
@@ -316,7 +316,7 @@ By this command we will promped to enter password
 ```
 Enter LDAP Password:
 ```
-After entering the correct password you can see the output as mentioned below-:
+After entering the correct password(redhat) you can see the output as mentioned below-:
 
 **output**
 ```
