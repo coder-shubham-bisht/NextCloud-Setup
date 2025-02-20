@@ -294,4 +294,16 @@ click on check sign on right side and then confirm your admin password as shown 
 
 Green colour tick on left side confirms the configuration is done correctly.
 
-### Step 9: Add SSO in NextCloud using keycloak
+### Step 9: Adding user to 389ds 
+We need to go inside the container of 389ds
+
+**command**
+```
+podman exec -it 389ds_ldap bash
+```
+**output**
+```
+9247c85f6611:/ #
+```
+
+Now, Firstly create a database 
