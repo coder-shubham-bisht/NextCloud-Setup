@@ -347,13 +347,13 @@ Explanation of each option:
 - ldapadd: Adds data to the LDAP directory.
 - -x: Uses simple username/password login.
 - -D "cn=Directory Manager": Logs in as the admin user (Directory Manager).
-- -W: Asks for the admin password.
+- -w: for adding the admin password.
 - -H ldap://localhost:3389: Connects to the LDAP server on your machine at port 3389.
 - -f base.ldif: Uses the file base.ldif to add data to the directory.
 
 **command**
 ```
-$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -w redhat -f base.ldif
+$ ldapadd -x -D "cn=Directory Manager"  -H ldap://localhost:3389 -w redhat -f base.ldif
 ```
 
 **output**
@@ -386,7 +386,7 @@ userPassword: rishabh@123
 Now, add this user.ldif file to 389ds Database
 **command**
 ```
-$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -w redhat -f user.ldif
+$ ldapadd -x -D "cn=Directory Manager"  -H ldap://localhost:3389 -w redhat -f user.ldif
 ```
 
 **output**
@@ -397,7 +397,7 @@ adding new entry "uid=rishabh,ou=users,dc=keenable,dc=io"
 Now, lets verify if the base and user are successfully added to 389ds 
 **command**
 ```
-$ ldapsearch -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -w redhat -b "dc=keenable,dc=io"
+$ ldapsearch -x -D "cn=Directory Manager" -H ldap://localhost:3389 -w redhat -b "dc=keenable,dc=io"
 ```
 **output**
 ```
