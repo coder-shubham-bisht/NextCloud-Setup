@@ -299,11 +299,145 @@ We need to go inside the container of 389ds
 
 **command**
 ```
-podman exec -it 389ds_ldap bash
+$ podman exec -it 389ds_ldap bash
 ```
 **output**
 ```
 9247c85f6611:/ #
 ```
 
-Now, Firstly create a database 
+Now, Firstly create a database for adding all the entries in a specific self created DB
+
+**command**
+```
+$ dsconf -D "cn=Directory Manager" ldap://localhost:3389 backend create --suffix "dc=keenable,dc=io" --be-name example
+```
+
+**output**
+```
+The database was successfully created.
+```
+
+Add a Base Entry:It is the starting point of the directory hierarchy (like the root of a tree).
+- Firstly create a base.ldif file
+**command**
+```
+$ vim base.ldif
+```
+
+**output**
+```
+dn: dc=keenable,dc=io
+objectClass: top
+objectClass: domain
+dc: keenable
+
+dn: ou=Users,dc=keenable,dc=io
+objectClass: organizationalUnit
+ou: Users
+```
+Now, add this base.ldif file to 389ds Database
+
+Explanation of each option:
+- ldapadd: Adds data to the LDAP directory.
+- -x: Uses simple username/password login.
+- -D "cn=Directory Manager": Logs in as the admin user (Directory Manager).
+- -W: Asks for the admin password.
+- -H ldap://localhost:3389: Connects to the LDAP server on your machine at port 3389.
+- -f /tmp/base.ldif: Uses the file /tmp/base.ldif to add data to the directory.
+
+**command**
+```
+$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -f base.ldif
+```
+
+**output**
+```
+adding new entry "dc=keenable,dc=io"
+```
+```
+adding new entry "ou=users,dc=keenable,dc=io"
+```
+
+Now we must create a user.ldif file with user credentials to add in 389ds 
+
+**command**
+```
+$ vim user.ldif
+```
+
+**output**
+```
+dn: uid=rishabh,ou=users,dc=keenable,dc=io
+objectClass: inetOrgPerson
+cn: Rishabh
+sn: Joshi
+uid: rishabh
+givenName: rj
+mail: rishabh@gmail.com
+userPassword: rishabh@123
+```
+
+Now, add this user.ldif file to 389ds Database
+**command**
+```
+$ ldapadd -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -f user.ldif
+```
+
+**output**
+```
+adding new entry "uid=rishabh,ou=users,dc=keenable,dc=io"
+```
+
+Now, lets verify if the base and user are successfully added to 389ds 
+**command**
+```
+$ ldapsearch -x -D "cn=Directory Manager" -W -H ldap://localhost:3389 -b "dc=keenable,dc=io"
+```
+**output**
+```
+Enter LDAP Password: 
+# extended LDIF
+#
+# LDAPv3
+# base <dc=keenable,dc=io> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# keenable.io
+dn: dc=keenable,dc=io
+objectClass: top
+objectClass: domain
+dc: keenable
+
+# users, keenable.io
+dn: ou=users,dc=keenable,dc=io
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+# rishabh, users, keenable.io
+dn: uid=rishabh,ou=users,dc=keenable,dc=io
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Rishabh
+sn: Joshi
+uid: rishabh
+givenName: rj
+mail: rishabh@gmail.com
+userPassword:: e1BCS0RGMi1TSEE1MTJ9MTAwMDAkanV3Q0ZZUUkwLzBvUjdZZnVzQTMzWDV2VlN
+ jUVFua3okdm1WQ2k0b3BzLzBNOGZ3bnVpUmdDUEdoTSszY3VMT2k0b2YzTDAzMEcxQ1cyV1k3QTRl
+ aTV6dG1NcEJ0elJOUDdXMWEvbDdjdFJxbWdJZGYrby9QeVE9PQ==
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 4
+# numEntries: 3
+```
+
+This will show all the entries of 389ds.
