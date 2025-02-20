@@ -339,7 +339,7 @@ dc: keenable
 
 dn: ou=Users,dc=keenable,dc=io
 objectClass: organizationalUnit
-ou: Users
+ou: users
 ```
 Now, add this base.ldif file to 389ds Database
 
